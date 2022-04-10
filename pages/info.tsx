@@ -1,3 +1,4 @@
+import type { GetServerSideProps } from "next";
 import { useSession, getSession } from "next-auth/react";
 
 export default function Page() {
@@ -14,10 +15,10 @@ export default function Page() {
   return <p>Access Denied</p>;
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       session: await getSession(context),
     },
   };
-}
+};

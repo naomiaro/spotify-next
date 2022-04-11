@@ -1,11 +1,20 @@
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 
+const scopes = [
+  "user-read-email",
+  "playlist-read-private",
+  "playlist-read-collaborative",
+  "playlist-modify-public",
+  "playlist-modify-private",
+];
+
 export default NextAuth({
   providers: [
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID!,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
+      authorization: { params: { scope: scopes.join(" ") } },
     }),
   ],
   callbacks: {
